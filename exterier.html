@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixMyFlat - Եքստերիերի դիզայն և վերանորոգում</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="media.css">
+    <style>
+        .exterior-header {
+            background: linear-gradient(135deg, #0a2e1a 0%, #1a4a2a 100%);
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .exterior-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center/cover;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        .exterior-header-content {
+            position: relative;
+            z-index: 1;
+        }
+        .exterior-header h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .exterior-header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255,255,255,0.8);
+        }
+        .exterior-categories {
+            padding: 60px 5%;
+            background: #0f0f14;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: white;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        .exterior-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .exterior-card {
+            background: #1a1a24;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .exterior-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+        .exterior-card-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        .exterior-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .exterior-card:hover .exterior-card-img img {
+            transform: scale(1.1);
+        }
+        .exterior-card-info {
+            padding: 20px;
+        }
+        .exterior-card-info h3 {
+            color: #FFD966;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        .exterior-card-info p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .exterior-card-info .price {
+            color: #FF8C42;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .exterior-card-info .rating {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+        .btn-exterior {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            border: none;
+            border-radius: 25px;
+            color: #1a1a2e;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .btn-exterior:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255,140,66,0.4);
+        }
+        @media (max-width: 768px) {
+            .exterior-header h1 {
+                font-size: 2.5rem;
+            }
+            .exterior-header p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+            .exterior-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video autoplay loop muted playsinline style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: brightness(0.45);">
+    <source src="https://cdn.pixabay.com/video/2023/07/15/172888-843174868_large.mp4" type="video/mp4">
+</video>
+    <div class="sec-anim-ball">
+        <div class="div-anim-div">
+            <div class="div-nav-bar">
+                <nav>
+                    <ul class="sidebar" id="sidebar">
+                        <li onclick="hideSidebar()">
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="name-logo"><a href="index.html">FixMyFlat</a></li>
+                        <li><a href="interier.html">Ինտերիեր</a></li>
+                        <li><a href="exterior.html">Եքստերիեր</a></li>
+                        <li><a href="garden.html">Մարգագետին և այգի</a></li>
+                        <li><a href="more.html">Ավելին</a></li>
+                        <li><a href="articles.html">Հոդվածներ և խորհուրդներ</a></li>
+                    </ul>
+                    <ul id="ull">
+                        <li class="name-logo n-logo"><a href="index.html">FixMyFlat</a></li>
+                        <li class="bottom-li tree"><a href="contact.html">Կապ մեզ հետ</a></li>
+                        <li class="menu-button" onclick="showSidebar()">
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="#5f6368">
+                                    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <ul class="ul">
+                    <li class="hideOnMobile li"><a href="interier.html">Ինտերիեր</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="exterior.html">Եքստերիեր</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="garden.html">Մարգագետին և այգի</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="more.html">Ավելին</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="articles.html">Հոդվածներ և խորհուրդներ</a></li><span class="span">|</span>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="exterior-header">
+        <div class="exterior-header-content">
+            <h1>Եքստերիերի դիզայն և վերանորոգում</h1>
+            <p>Գեղեցիկ և դիմացկուն արտաքին ձևավորում ձեր տան համար։ Պատերի երեսպատում, ճակատային աշխատանքներ և այլն։</p>
+        </div>
+    </div>
+
+    <section class="exterior-categories">
+        <h2 class="section-title">Մեր ծառայությունները</h2>
+        <div class="exterior-grid">
+            <div class="exterior-card">
+                <div class="exterior-card-img">
+                    <img src="https://images.pexels.com/photos/209296/pexels-photo-209296.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Ճակատային աշխատանքներ">
+                </div>
+                <div class="exterior-card-info">
+                    <h3>Ճակատային աշխատանքներ</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ 4.9 (312)</div>
+                    <p>Տան արտաքին մասի ամբողջական վերանորոգում և գեղեցկացում։</p>
+                    <div class="price">սկսած 300,000 դրամից</div>
+                    <a href="#" class="btn-exterior">Պատվիրել</a>
+                </div>
+            </div>
+            <div class="exterior-card">
+                <div class="exterior-card-img">
+                    <img src="https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Պատշգամբներ">
+                </div>
+                <div class="exterior-card-info">
+                    <h3>Պատշգամբների վերանորոգում</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ 4.8 (245)</div>
+                    <p>Պատշգամբների ամրացում, մեկուսացում և գեղեցկացում։</p>
+                    <div class="price">սկսած 150,000 դրամից</div>
+                    <a href="#" class="btn-exterior">Պատվիրել</a>
+                </div>
+            </div>
+            <div class="exterior-card">
+                <div class="exterior-card-img">
+                    <img src="https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Պատուհաններ և դռներ">
+                </div>
+                <div class="exterior-card-info">
+                    <h3>Պատուհանների և դռների տեղադրում</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ 4.7 (189)</div>
+                    <p>Էներգաարդյունավետ պատուհանների և դռների տեղադրում։</p>
+                    <div class="price">սկսած 200,000 դրամից</div>
+                    <a href="#" class="btn-exterior">Պատվիրել</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="select-4">
+        <div class="fix-my-flat-menyu">
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title">Տանտերերի ծառայություններ</p>
+                        <a href="#" class="services-link">Գտեք տեղական բիզնեսներ</a> 
+                        <a href="#" class="services-link">Ծառայություններ մոտակայքում</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title">Սպասարկման մասնագետների համար</p>
+                        <a href="#" class="services-link">Գրանցեք ձեր բիզնեսը</a>
+                        <a href="#" class="services-link">Բիզնես կենտրոն</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title" style="color: white;">Ռեսուրսներ</p>
+                        <a href="#" class="services-link" style="color: white;">Լուծումների կենտրոն</a>
+                        <a href="#" class="services-link" style="color: white;">Նախագծի ծախսերի կենտրոն</a>
+                        <a href="#" class="services-link" style="color: white;">Հաճախակի տրվող հարցեր</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title" style="color: white;">Մեր մասին</p>
+                        <a href="#" class="services-link" style="color: white;">Ինչպես է այն աշխատում</a>
+                        <a href="#" class="services-link" style="color: white;">Ո՞վ ենք մենք</a>
+                        <a href="#" class="services-link" style="color: white;">Կապ մեզ հետ</a>
+                        <a href="#" class="services-link" style="color: white;">Երջանկության երաշխիք</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        function showSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if(sidebar) sidebar.style.display = 'flex';
+        }
+        function hideSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if(sidebar) sidebar.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixMyFlat - Հոդվածներ և խորհուրդներ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="media.css">
+    <style>
+        .articles-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .articles-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .articles-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: rgba(255,255,255,0.8);
+        }
+        .articles-grid {
+            padding: 60px 5%;
+            background: #0f0f14;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .article-card {
+            background: #1a1a24;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+        .article-card-img {
+            height: 220px;
+        }
+        .article-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .article-card-content {
+            padding: 25px;
+        }
+        .article-card-content h3 {
+            color: #FFD966;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        .article-card-content .date {
+            color: #FF8C42;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .article-card-content p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .read-more {
+            color: #FF8C42;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .read-more:hover {
+            color: #FFD966;
+        }
+        .tips-section {
+            background: linear-gradient(135deg, #16213e, #0f0f14);
+            padding: 60px 5%;
+            text-align: center;
+        }
+        .tips-section h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+        .tips-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .tip {
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 15px;
+            flex: 1;
+            min-width: 250px;
+        }
+        .tip ion-icon {
+            font-size: 2.5rem;
+            color: #FF8C42;
+            margin-bottom: 15px;
+        }
+        .tip h3 {
+            color: #FFD966;
+            margin-bottom: 10px;
+        }
+        .tip p {
+            color: #aaa;
+        }
+        @media (max-width: 768px) {
+            .articles-header h1 {
+                font-size: 2rem;
+            }
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video autoplay loop muted playsinline style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: brightness(0.45);">
+    <source src="https://cdn.pixabay.com/video/2023/07/15/172888-843174868_large.mp4" type="video/mp4">
+</video>
+
+    <div class="sec-anim-ball">
+        <div class="div-anim-div">
+            <div class="div-nav-bar">
+                <nav>
+                    <ul class="sidebar" id="sidebar">
+                        <li onclick="hideSidebar()">
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="name-logo"><a href="index.html">FixMyFlat</a></li>
+                        <li><a href="interier.html">Ինտերիեր</a></li>
+                        <li><a href="exterior.html">Եքստերիեր</a></li>
+                        <li><a href="garden.html">Մարգագետին և այգի</a></li>
+                        <li><a href="more.html">Ավելին</a></li>
+                        <li><a href="articles.html">Հոդվածներ և խորհուրդներ</a></li>
+                    </ul>
+                    <ul id="ull">
+                        <li class="name-logo n-logo"><a href="index.html">FixMyFlat</a></li>
+                        <li class="bottom-li tree"><a href="contact.html">Կապ մեզ հետ</a></li>
+                        <li class="menu-button" onclick="showSidebar()">
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="#5f6368">
+                                    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <ul class="ul">
+                    <li class="hideOnMobile li"><a href="interier.html">Ինտերիեր</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="exterior.html">Եքստերիեր</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="garden.html">Մարգագետին և այգի</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="more.html">Ավելին</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="articles.html">Հոդվածներ և խորհուրդներ</a></li><span class="span">|</span>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="articles-header">
+        <div>
+            <h1>Հոդվածներ և խորհուրդներ</h1>
+            <p>Օգտակար տեղեկատվություն տան վերանորոգման և դիզայնի մասին</p>
+        </div>
+    </div>
+
+    <div class="articles-grid">
+        <div class="article-card">
+            <div class="article-card-img">
+                <img src="https://images.pexels.com/photos/1643384/pexels-photo-1643384.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Ինտերիերի խորհուրդներ">
+            </div>
+            <div class="article-card-content">
+                <h3>10 խորհուրդ ձեր ինտերիերը գեղեցկացնելու համար</h3>
+                <span class="date">15 Ապրիլի, 2026</span>
+                <p>Ինչպես ընտրել ճիշտ գույները, կահույքը և դեկորը ձեր տան համար:</p>
+                <a href="#" class="read-more">Կարդալ ավելին →</a>
+            </div>
+        </div>
+        <div class="article-card">
+            <div class="article-card-img">
+                <img src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Վերանորոգում">
+            </div>
+            <div class="article-card-content">
+                <h3>Ինչպես խնայել վերանորոգման ժամանակ</h3>
+                <span class="date">10 Ապրիլի, 2026</span>
+                <p>Վերանորոգման 5 արդյունավետ խորհուրդ, որոնք կօգնեն ձեզ խնայել ժամանակ և գումար:</p>
+                <a href="#" class="read-more">Կարդալ ավելին →</a>
+            </div>
+        </div>
+        <div class="article-card">
+            <div class="article-card-img">
+                <img src="https://images.pexels.com/photos/2089698/pexels-photo-2089698.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Էկո դիզայն">
+            </div>
+            <div class="article-card-content">
+                <h3>Էկոլոգիական նյութեր ինտերիերում</h3>
+                <span class="date">5 Ապրիլի, 2026</span>
+                <p>Ինչպես ընտրել էկոլոգիական և անվտանգ նյութեր ձեր տան համար:</p>
+                <a href="#" class="read-more">Կարդալ ավելին →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="tips-section">
+        <h2>Օգտակար խորհուրդներ</h2>
+        <div class="tips-container">
+            <div class="tip">
+                <ion-icon name="color-palette-outline"></ion-icon>
+                <h3>Գույների համադրություն</h3>
+                <p>Օգտագործեք 60-30-10 կանոնը՝ 60% հիմնական գույն, 30% երկրորդական, 10% շեշտադրման գույն:</p>
+            </div>
+            <div class="tip">
+                <ion-icon name="bulb-outline"></ion-icon>
+                <h3>Լուսավորություն</h3>
+                <p>Համատեղեք ընդհանուր, աշխատանքային և շեշտադրման լուսավորությունը:</p>
+            </div>
+            <div class="tip">
+                <ion-icon name="leaf-outline"></ion-icon>
+                <h3>Բնական նյութեր</h3>
+                <p>Նախապատվությունը տվեք փայտին, քարին և բամբակին՝ ջերմ մթնոլորտի համար:</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="select-4">
+        <div class="fix-my-flat-menyu">
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title">Տանտերերի ծառայություններ</p>
+                        <a href="local-businesses.html" class="services-link">Գտեք տեղական բիզնեսներ</a> 
+                        <a href="services-nearby.html" class="services-link">Ծառայություններ մոտակայքում</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title">Սպասարկման մասնագետների համար</p>
+                        <a href="register-business.html" class="services-link">Գրանցեք ձեր բիզնեսը</a>
+                        <a href="business-center.html" class="services-link">Բիզնես կենտրոն</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title" style="color: white;">Ռեսուրսներ</p>
+                        <a href="solutions-center.html" class="services-link" style="color: white;">Լուծումների կենտրոն</a>
+                        <a href="project-costs-center.html" class="services-link" style="color: white;">Նախագծի ծախսերի կենտրոն</a>
+                        <a href="faq.html" class="services-link" style="color: white;">Հաճախակի տրվող հարցեր</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title" style="color: white;">Մեր մասին</p>
+                        <a href="about.html" class="services-link" style="color: white;">Ինչպես է այն աշխատում</a>
+                        <a href="team.html" class="services-link" style="color: white;">Ո՞վ ենք մենք</a>
+                        <a href="contact.html" class="services-link" style="color: white;">Կապ մեզ հետ</a>
+                        <a href="privacy-policy.html" class="services-link" style="color: white;">Երջանկության երաշխիք</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        function showSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if(sidebar) sidebar.style.display = 'flex';
+        }
+        function hideSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if(sidebar) sidebar.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

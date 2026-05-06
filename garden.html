@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixMyFlat - Մարգագետին և այգի</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="media.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .garden-header {
+            background: linear-gradient(135deg, #0a2e1a 0%, #1a4a2a 100%);
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .garden-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .garden-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: rgba(255,255,255,0.8);
+        }
+        .services-grid {
+            padding: 60px 5%;
+            background: #0f0f14;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 35px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .service-card {
+            background: #1a1a24;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        .service-img {
+            height: 220px;
+            overflow: hidden;
+            background: #2a2a35;
+        }
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .service-card:hover .service-img img {
+            transform: scale(1.08);
+        }
+        .service-content {
+            padding: 25px;
+        }
+        .service-content h3 {
+            color: #FFD966;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+        .service-content p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .service-content .price {
+            color: #FF8C42;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .service-content .rating {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+        .btn-service {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            border: none;
+            border-radius: 25px;
+            color: #1a1a2e;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .btn-service:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255,140,66,0.4);
+        }
+        .plants-section {
+            background: linear-gradient(135deg, #16213e, #0f0f14);
+            padding: 60px 5%;
+            text-align: center;
+        }
+        .plants-section h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+        .plants-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .plant {
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 15px;
+            flex: 1;
+            min-width: 200px;
+        }
+        .plant ion-icon {
+            font-size: 2.5rem;
+            color: #6AB04A;
+            margin-bottom: 15px;
+        }
+        .plant h3 {
+            color: #FFD966;
+            margin-bottom: 10px;
+        }
+        .plant p {
+            color: #aaa;
+        }
+        .tips-grid {
+            padding: 60px 5%;
+            background: #0f0f14;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .tip-card {
+            background: #1a1a24;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+        .tip-card ion-icon {
+            font-size: 2rem;
+            color: #6AB04A;
+            margin-bottom: 15px;
+        }
+        .tip-card h4 {
+            color: #FFD966;
+            margin-bottom: 10px;
+        }
+        .tip-card p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            .garden-header h1 {
+                font-size: 2rem;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video autoplay loop muted playsinline style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: brightness(0.45);">
+    <source src="https://cdn.pixabay.com/video/2023/07/15/172888-843174868_large.mp4" type="video/mp4">
+</video>
+
+    <div class="sec-anim-ball">
+        <div class="div-anim-div">
+            <div class="div-nav-bar">
+                <nav>
+                    <ul class="sidebar" id="sidebar">
+                        <li onclick="hideSidebar()">
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="name-logo"><a href="index.html">FixMyFlat</a></li>
+                        <li><a href="interier.html">Ինտերիեր</a></li>
+                        <li><a href="exterier.html">Եքստերիեր</a></li>
+                        <li><a href="garden.html">Մարգագետին և այգի</a></li>
+                        <li><a href="more.html">Ավելին</a></li>
+                        <li><a href="articles.html">Հոդվածներ և խորհուրդներ</a></li>
+                    </ul>
+                    <ul id="ull">
+                        <li class="name-logo n-logo"><a href="index.html">FixMyFlat</a></li>
+                        <li class="bottom-li tree"><a href="contact.html">Կապ մեզ հետ</a></li>
+                        <li class="menu-button" onclick="showSidebar()">
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="#5f6368">
+                                    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <ul class="ul">
+                    <li class="hideOnMobile li"><a href="interier.html">Ինտերիեր</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="exterior.html">Եքստերիեր</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="garden.html">Մարգագետին և այգի</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="more.html">Ավելին</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="articles.html">Հոդվածներ և խորհուրդներ</a></li><span class="span">|</span>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="garden-header">
+        <div>
+            <h1>Մարգագետին և այգի</h1>
+            <p>Կանաչապատում, լանդշաֆտային դիզայն և այգիների խնամք</p>
+        </div>
+    </div>
+
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-img">
+                <img src="https://picsum.photos/id/104/600/400" alt="Մարգագետնի հարդարում">
+            </div>
+            <div class="service-content">
+                <div class="rating">⭐⭐⭐⭐⭐ 4.9 (189)</div>
+                <h3>Մարգագետնի հարդարում</h3>
+                <p>Մարգագետնի ցանում, հնձում, ոռոգման համակարգի տեղադրում և ամբողջական խնամք։</p>
+                <span class="price">սկսած 30,000 դրամից</span>
+                <a href="#" class="btn-service">Պատվիրել</a>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <div class="service-img">
+                <img src="https://picsum.photos/id/15/600/400" alt="Լանդշաֆտային դիզայն">
+            </div>
+            <div class="service-content">
+                <div class="rating">⭐⭐⭐⭐⭐ 4.8 (156)</div>
+                <h3>Լանդշաֆտային դիզայն</h3>
+                <p>Այգիների նախագծում, ծառերի և թփերի տնկում, դեկորատիվ տարրերի տեղադրում։</p>
+                <span class="price">սկսած 100,000 դրամից</span>
+                <a href="#" class="btn-service">Պատվիրել</a>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <div class="service-img">
+                <img src="https://picsum.photos/id/96/600/400" alt="Ոռոգման համակարգ">
+            </div>
+            <div class="service-content">
+                <div class="rating">⭐⭐⭐⭐⭐ 4.7 (134)</div>
+                <h3>Ոռոգման համակարգ</h3>
+                <p>Ավտոմատ ոռոգման համակարգերի տեղադրում, կաթիլային ոռոգում և ջրի խնայող տեխնոլոգիաներ։</p>
+                <span class="price">սկսած 50,000 դրամից</span>
+                <a href="#" class="btn-service">Պատվիրել</a>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <div class="service-img">
+                <img src="https://picsum.photos/id/127/600/400" alt="Ծառերի էտում">
+            </div>
+            <div class="service-content">
+                <div class="rating">⭐⭐⭐⭐⭐ 4.9 (112)</div>
+                <h3>Ծառերի էտում և խնամք</h3>
+                <p>Ծառերի և թփերի սանիտարական էտում, ձևավորում, վնասատուներից պաշտպանություն։</p>
+                <span class="price">սկսած 15,000 դրամից</span>
+                <a href="#" class="btn-service">Պատվիրել</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="plants-section">
+        <h2>Հանրաճանաչ բույսեր</h2>
+        <div class="plants-container">
+            <div class="plant">
+                <ion-icon name="leaf-outline"></ion-icon>
+                <h3>Դեկորատիվ թփեր</h3>
+                <p>Շրմաղի, հորտենզիա, գիհի</p>
+            </div>
+            <div class="plant">
+                <ion-icon name="flower-outline"></ion-icon>
+                <h3>Ծաղիկներ</h3>
+                <p>Վարդեր, հիրիկներ, քրիզանթեմներ</p>
+            </div>
+            <div class="plant">
+                <ion-icon name="tree-outline"></ion-icon>
+                <h3>Ծառեր</h3>
+                <p>Սոճի, կեչի, թխկի, եղևնի</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tips-grid">
+        <div class="tip-card">
+            <ion-icon name="sunny-outline"></ion-icon>
+            <h4>Արևի լույս</h4>
+            <p>Ուսումնասիրեք ձեր այգու արևոտ և ստվերոտ հատվածները բույսեր ընտրելիս</p>
+        </div>
+        <div class="tip-card">
+            <ion-icon name="water-outline"></ion-icon>
+            <h4>Ջրում</h4>
+            <p>Ավելի լավ է ջրել առավոտյան կամ երեկոյան, երբ արևը այնքան էլ ուժեղ չէ</p>
+        </div>
+        <div class="tip-card">
+            <ion-icon name="cut-outline"></ion-icon>
+            <h4>Կանոնավոր էտում</h4>
+            <p>Բույսերի կանոնավոր էտումը նպաստում է ավելի լավ աճին և ծաղկմանը</p>
+        </div>
+        <div class="tip-card">
+            <ion-icon name="planet-outline"></ion-icon>
+            <h4>Սեզոնային խնամք</h4>
+            <p>Յուրաքանչյուր սեզոն ունի իր առանձնահատկությունները այգիների խնամքում</p>
+        </div>
+    </div>
+
+    <section class="select-4">
+        <div class="fix-my-flat-menyu">
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title">Տանտերերի ծառայություններ</p>
+                        <a href="#" class="services-link">Գտեք տեղական բիզնեսներ</a> 
+                        <a href="#" class="services-link">Ծառայություններ մոտակայքում</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title">Սպասարկման մասնագետների համար</p>
+                        <a href="#" class="services-link">Գրանցեք ձեր բիզնեսը</a>
+                        <a href="#" class="services-link">Բիզնես կենտրոն</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title" style="color: white;">Ռեսուրսներ</p>
+                        <a href="#" class="services-link" style="color: white;">Լուծումների կենտրոն</a>
+                        <a href="#" class="services-link" style="color: white;">Նախագծի ծախսերի կենտրոն</a>
+                        <a href="#" class="services-link" style="color: white;">Հաճախակի տրվող հարցեր</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title" style="color: white;">Մեր մասին</p>
+                        <a href="#" class="services-link" style="color: white;">Ինչպես է այն աշխատում</a>
+                        <a href="#" class="services-link" style="color: white;">Ո՞վ ենք մենք</a>
+                        <a href="#" class="services-link" style="color: white;">Կապ մեզ հետ</a>
+                        <a href="#" class="services-link" style="color: white;">Երջանկության երաշխիք</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        function showSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if(sidebar) sidebar.style.display = 'flex';
+        }
+        function hideSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if(sidebar) sidebar.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixMyFlat - Ինտերիերի դիզայն և վերանորոգում</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="media.css">
+    <link rel="Website icon" type="image/png" href="https://www.freepnglogos.com/uploads/logo-home-png/chimney-home-icon-transparent-1.png">
+    <style>
+        /* Ինտերիերի էջի հատուկ ոճեր */
+        .interior-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interior-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center/cover;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .interior-header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .interior-header h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .interior-header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .interior-categories {
+            padding: 60px 5%;
+            background: #0f0f14;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: white;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .interior-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .interior-card {
+            background: #1a1a24;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .interior-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .interior-card-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .interior-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .interior-card:hover .interior-card-img img {
+            transform: scale(1.1);
+        }
+
+        .interior-card-info {
+            padding: 20px;
+        }
+
+        .interior-card-info h3 {
+            color: #FFD966;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .interior-card-info p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .interior-card-info .price {
+            color: #FF8C42;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .interior-card-info .rating {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .btn-interior {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            border: none;
+            border-radius: 25px;
+            color: #1a1a2e;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .btn-interior:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255,140,66,0.4);
+        }
+
+        .interior-steps {
+            background: linear-gradient(135deg, #16213e, #0f0f14);
+            padding: 60px 5%;
+        }
+
+        .steps-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            color: #1a1a2e;
+        }
+
+        .step h3 {
+            color: #FFD966;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: #aaa;
+        }
+
+        .interior-faq {
+            padding: 60px 5%;
+            background: #0f0f14;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #1a1a24;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 18px 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #252530;
+        }
+
+        .faq-question ion-icon {
+            font-size: 1.3rem;
+            transition: 0.3s;
+            color: #FF8C42;
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.3s;
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 25px 20px;
+            max-height: 200px;
+        }
+
+        .faq-item.active .faq-question ion-icon {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 768px) {
+            .interior-header h1 {
+                font-size: 2.5rem;
+            }
+            .interior-header p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+            .interior-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video autoplay loop muted playsinline style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: brightness(0.45);">
+    <source src="https://cdn.pixabay.com/video/2023/07/15/172888-843174868_large.mp4" type="video/mp4">
+</video>
+    <div class="sec-anim-ball">
+        <div class="div-anim-div">
+            <div class="div-nav-bar">
+                <nav>
+                    <ul class="sidebar" id="sidebar">
+                        <li onclick="hideSidebar()">
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                    <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="name-logo"><a href="index.html">FixMyFlat</a></li>
+                        <li><a href="Interier.html">Ինտերիեր</a></li>
+                        <li><a href="exterier.html">Եքստերիեր</a></li>
+                        <li><a href="garden.html">Մարգագետին և այգի</a></li>
+                        <li><a href="more.html">Ավելին</a></li>
+                        <li><a href="articles.html">Հոդվածներ և խորհուրդներ</a></li>
+                    </ul>
+                    <ul id="ull">
+                        <li class="name-logo n-logo"><a href="index.html">FixMyFlat</a></li>
+                        <li class="bottom-li tree"><a href="#">Կապ մեզ հետ</a></li>
+                        <li class="menu-button" onclick="showSidebar()">
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="#5f6368">
+                                    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <ul class="ul">
+                    <li class="hideOnMobile li"><a href="Interier.html">Ինտերիեր</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="exterier.html">Եքստերիեր</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="garden.html">Մարգագետին և այգի</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li">
+                        <a href="contact.html">Ավելին 
+                            <div class="more">
+                                <ul>
+                                    <li><a href="#">Կահույքի վերանորոգում</a></li>
+                                    <li><a href="#">Էլեկտրական աշխատանքներ</a></li>
+                                    <li><a href="#">Կոյուղու աշխատանքներ</a></li>
+                                    <li><a href="#">Տանիքի աշխատանքներ</a></li>
+                                    <li><a href="#">Պատերի վերանորոգում</a></li>
+                                </ul>
+                            </div>
+                        </a>
+                    </li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="articles.html">Հոդվածներ և խորհուրդներ</a></li><span class="span">|</span>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ինտերիերի գլխավոր բաժին -->
+    <div class="interior-header">
+        <div class="interior-header-content">
+            <h1>Ինտերիերի դիզայն և վերանորոգում</h1>
+            <p>Վերափոխեք ձեր տունը ոճային և ֆունկցիոնալ ինտերիերով։ Մեր թիմը կօգնի ձեզ ստեղծել ձեր երազանքների տունը։</p>
+        </div>
+    </div>
+
+    <!-- Ծառայությունների բաժին -->
+    <section class="interior-categories">
+        <h2 class="section-title">Մեր ծառայությունները</h2>
+        <div class="interior-grid">
+            <div class="interior-card">
+                <div class="interior-card-img">
+                    <img src="https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Խոհանոցի դիզայն">
+                </div>
+                <div class="interior-card-info">
+                    <h3>Խոհանոցի դիզայն</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ 4.9 (245)</div>
+                    <p>Ժամանակակից և ֆունկցիոնալ խոհանոցի նախագծում և վերանորոգում։</p>
+                    <div class="price">սկսած 150,000 դրամից</div>
+                    <a href="#" class="btn-interior">Պատվիրել</a>
+                </div>
+            </div>
+            <div class="interior-card">
+                <div class="interior-card-img">
+                    <img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Լոգարանի վերանորոգում">
+                </div>
+                <div class="interior-card-info">
+                    <h3>Լոգարանի վերանորոգում</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ 4.8 (189)</div>
+                    <p>Սանհանգույցի ամբողջական վերանորոգում և ժամանակակից դիզայն։</p>
+                    <div class="price">սկսած 200,000 դրամից</div>
+                    <a href="#" class="btn-interior">Պատվիրել</a>
+                </div>
+            </div>
+            <div class="interior-card">
+                <div class="interior-card-img">
+                    <img src="https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Հյուրասենյակ">
+                </div>
+                <div class="interior-card-info">
+                    <h3>Հյուրասենյակի դիզայն</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ 4.9 (312)</div>
+                    <p>Հարմարավետ և ոճային հյուրասենյակի նախագծում և կահավորում։</p>
+                    <div class="price">սկսած 180,000 դրամից</div>
+                    <a href="#" class="btn-interior">Պատվիրել</a>
+                </div>
+            </div>
+            <div class="interior-card">
+                <div class="interior-card-img">
+                    <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Ննջասենյակ">
+                </div>
+                <div class="interior-card-info">
+                    <h3>Ննջասենյակի դիզայն</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ 4.7 (156)</div>
+                    <p>Հանգստացնող մթնոլորտով ննջասենյակի ձևավորում։</p>
+                    <div class="price">սկսած 120,000 դրամից</div>
+                    <a href="#" class="btn-interior">Պատվիրել</a>
+                </div>
+            </div>
+            <div class="interior-card">
+                <div class="interior-card-img">
+                    <img src="https://images.pexels.com/photos/6457080/pexels-photo-6457080.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Մանկական սենյակ">
+                </div>
+                <div class="interior-card-info">
+                    <h3>Մանկական սենյակ</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ 4.9 (98)</div>
+                    <p>Անվտանգ և գեղեցիկ մանկական սենյակի նախագծում։</p>
+                    <div class="price">սկսած 100,000 դրամից</div>
+                    <a href="#" class="btn-interior">Պատվիրել</a>
+                </div>
+            </div>
+            <div class="interior-card">
+                <div class="interior-card-img">
+                    <img src="https://images.pexels.com/photos/1534958/pexels-photo-1534958.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Աշխատասենյակ">
+                </div>
+                <div class="interior-card-info">
+                    <h3>Աշխատասենյակի դիզայն</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ 4.8 (134)</div>
+                    <p>Հարմարավետ աշխատանքային միջավայր home office-ի համար։</p>
+                    <div class="price">սկսած 90,000 դրամից</div>
+                    <a href="#" class="btn-interior">Պատվիրել</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ինչպես ենք աշխատում -->
+    <section class="interior-steps">
+        <h2 class="section-title">Ինչպես ենք աշխատում</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Խորհրդատվություն</h3>
+                <p>Մենք լսում ենք ձեր ցանկությունները և չափումներ կատարում</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Դիզայն նախագիծ</h3>
+                <p>Ստեղծում ենք 3D նախագիծ և ընտրում նյութեր</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Վերանորոգում</h3>
+                <p>Մեր թիմը իրականացնում է բոլոր աշխատանքները</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Հանձնում</h3>
+                <p>Ստուգում ենք որակը և հանձնում ձեր երազանքների տունը</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ բաժին -->
+    <section class="interior-faq">
+        <h2 class="section-title">Հաճախ տրվող հարցեր</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Որքա՞ն ժամանակ է տևում ինտերիերի վերանորոգումը</span>
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                </div>
+                <div class="faq-answer">
+                    Վերանորոգման տևողությունը կախված է աշխատանքի ծավալից: Միջին հաշվով մեկ սենյակի վերանորոգումը տևում է 2-4 շաբաթ:
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Արդյո՞ք տրամադրում եք երաշխիք</span>
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                </div>
+                <div class="faq-answer">
+                    Այո, բոլոր աշխատանքների վրա տրամադրում ենք 2 տարվա երաշխիք:
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Կարո՞ղ եք աշխատել իմ բյուջեի շրջանակում</span>
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                </div>
+                <div class="faq-answer">
+                    Մենք առաջարկում ենք տարբեր բյուջեների համար նախատեսված լուծումներ և օգնում ենք ընտրել օպտիմալ տարբերակը:
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Արդյո՞ք նախագիծը անվճար է</span>
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                </div>
+                <div class="faq-answer">
+                    Այո, մենք առաջարկում ենք անվճար նախնական խորհրդատվություն և նախագծում:
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="select-4">
+        <div class="fix-my-flat-menyu">
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title">Տանտերերի ծառայություններ</p>
+                        <a href="#" class="services-link">Գտեք տեղական բիզնեսներ</a> 
+                        <a href="#" class="services-link">Ծառայություններ մոտակայքում</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title">Սպասարկման մասնագետների համար</p>
+                        <a href="#" class="services-link">Գրանցեք ձեր բիզնեսը</a>
+                        <a href="#" class="services-link">Բիզնես կենտրոն</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title" style="color: white;">Ռեսուրսներ</p>
+                        <a href="#" class="services-link" style="color: white;">Լուծումների կենտրոն</a>
+                        <a href="#" class="services-link" style="color: white;">Նախագծի ծախսերի կենտրոն</a>
+                        <a href="#" class="services-link" style="color: white;">Հաճախակի տրվող հարցեր</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul class="services-list">
+                    <li class="services-item">
+                        <p class="services-title" style="color: white;">Մեր մասին</p>
+                        <a href="#" class="services-link" style="color: white;">Ինչպես է այն աշխատում</a>
+                        <a href="#" class="services-link" style="color: white;">Ո՞վ ենք մենք</a>
+                        <a href="#" class="services-link" style="color: white;">Կապ մեզ հետ</a>
+                        <a href="#" class="services-link" style="color: white;">Երջանկության երաշխիք</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        // FAQ toggles
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Sidebar functions
+        function showSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if(sidebar) sidebar.style.display = 'flex';
+        }
+
+        function hideSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if(sidebar) sidebar.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
