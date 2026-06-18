@@ -11,6 +11,7 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="media.css">
+    <video src="/video/video.mp4" autoplay muted loop></video>
     <style>
         .contact-header {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
@@ -174,6 +175,282 @@
         .hours-item p {
             color: #aaa;
         }
+
+        /* ===== AI CHATBOT STYLES ===== */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            border: none;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 5px 25px rgba(255, 140, 66, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 35px rgba(255, 140, 66, 0.6);
+        }
+        .chatbot-toggle ion-icon {
+            font-size: 30px;
+            color: white;
+        }
+        .chatbot-toggle .notification-dot {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 14px;
+            height: 14px;
+            background: #e74c3c;
+            border-radius: 50%;
+            border: 2px solid #0f0f14;
+            animation: pulse-dot 1.5s infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        .chatbot-window {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 380px;
+            height: 500px;
+            background: #1a1a24;
+            border-radius: 20px;
+            box-shadow: 0 15px 60px rgba(0,0,0,0.6);
+            z-index: 9998;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            animation: slideUp 0.3s ease;
+        }
+        .chatbot-window.open {
+            display: flex;
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .chatbot-header {
+            padding: 20px 25px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .chatbot-header .header-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .chatbot-header .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: #0f0f14;
+        }
+        .chatbot-header .header-text h3 {
+            color: white;
+            font-size: 16px;
+            margin: 0;
+        }
+        .chatbot-header .header-text p {
+            color: rgba(255,255,255,0.5);
+            font-size: 12px;
+            margin: 0;
+        }
+        .chatbot-header .header-text p .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #2ecc71;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse-dot 1.5s infinite;
+        }
+        .chatbot-header .close-chat {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.5);
+            font-size: 24px;
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 0 5px;
+        }
+        .chatbot-header .close-chat:hover {
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .chatbot-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+        .chatbot-messages::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+        .chatbot-messages::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            border-radius: 2px;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+            animation: messageIn 0.3s ease;
+        }
+        @keyframes messageIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .message.bot {
+            background: #2a2a35;
+            color: #e0e0e0;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        .message.bot .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 4px 0;
+        }
+        .message.bot .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: #FFD966;
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite;
+        }
+        .message.bot .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .message.bot .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingBounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-8px); }
+        }
+        .message.user {
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            color: #0f0f14;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+            font-weight: 500;
+        }
+        .message .timestamp {
+            font-size: 10px;
+            opacity: 0.5;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .chatbot-input-area {
+            padding: 15px 20px;
+            background: #12121a;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .chatbot-input-area input {
+            flex: 1;
+            padding: 10px 15px;
+            background: #2a2a35;
+            border: 1px solid #3a3a45;
+            border-radius: 25px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .chatbot-input-area input:focus {
+            border-color: #FF8C42;
+        }
+        .chatbot-input-area input::placeholder {
+            color: #666;
+        }
+        .chatbot-input-area .send-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFD966, #FF8C42);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+        .chatbot-input-area .send-btn:hover {
+            transform: scale(1.1);
+        }
+        .chatbot-input-area .send-btn ion-icon {
+            font-size: 20px;
+            color: #0f0f14;
+        }
+
+        /* Quick replies */
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0 20px 10px 20px;
+            background: #1a1a24;
+        }
+        .quick-replies .qr-btn {
+            padding: 6px 14px;
+            background: #2a2a35;
+            border: 1px solid #3a3a45;
+            border-radius: 20px;
+            color: #aaa;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .quick-replies .qr-btn:hover {
+            border-color: #FF8C42;
+            color: white;
+            background: #3a3a45;
+        }
+
         @media (max-width: 768px) {
             .contact-header h1 {
                 font-size: 2rem;
@@ -181,13 +458,46 @@
             .contact-section {
                 flex-direction: column;
             }
+            .chatbot-window {
+                width: calc(100% - 20px);
+                right: 10px;
+                bottom: 90px;
+                height: 450px;
+            }
+            .chatbot-toggle {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+            }
+            .chatbot-toggle ion-icon {
+                font-size: 26px;
+            }
+        }
+        @media (max-width: 480px) {
+            .chatbot-window {
+                height: 400px;
+                bottom: 80px;
+            }
+            .message {
+                font-size: 13px;
+                max-width: 90%;
+                padding: 10px 14px;
+            }
+            .chatbot-header {
+                padding: 15px 20px;
+            }
+            .chatbot-header .header-text h3 {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <video autoplay loop muted playsinline style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: brightness(0.45);">
-    <source src="https://cdn.pixabay.com/video/2023/07/15/172888-843174868_large.mp4" type="video/mp4">
-</video>
+        <source src="https://cdn.pixabay.com/video/2023/07/15/172888-843174868_large.mp4" type="video/mp4">
+    </video>
+
     <div class="sec-anim-ball">
         <div class="div-anim-div">
             <div class="div-nav-bar">
@@ -202,11 +512,10 @@
                         </li>
                         <li class="name-logo"><a href="index.html">FixMyFlat</a></li>
                         <li><a href="interier.html">Ինտերիեր</a></li>
-                        <li><a href="exterior.html">Եքստերիեր</a></li>
+                        <li><a href="exterier.html">Եքստերիեր</a></li>
                         <li><a href="garden.html">Մարգագետին և այգի</a></li>
                         <li><a href="more.html">Ավելին</a></li>
                         <li><a href="articles.html">Հոդվածներ և խորհուրդներ</a></li>
-                        <li><a href="contact.html">Կապ մեզ հետ</a></li>
                     </ul>
                     <ul id="ull">
                         <li class="name-logo n-logo"><a href="index.html">FixMyFlat</a></li>
@@ -222,11 +531,10 @@
                 </nav>
                 <ul class="ul">
                     <li class="hideOnMobile li"><a href="interier.html">Ինտերիեր</a></li><span class="span">|</span>
-                    <li class="hideOnMobile li"><a href="exterior.html">Եքստերիեր</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="exterier.html">Եքստերիեր</a></li><span class="span">|</span>
                     <li class="hideOnMobile li"><a href="garden.html">Մարգագետին և այգի</a></li><span class="span">|</span>
                     <li class="hideOnMobile li"><a href="more.html">Ավելին</a></li><span class="span">|</span>
-                    <li class="hideOnMobile li"><a href="articles.html">Հոդվածներ և խորհուրդներ</a></li><span class="span">|</span>
-                    <li class="hideOnMobile li"><a href="contact.html">Կապ մեզ հետ</a></li><span class="span">|</span>
+                    <li class="hideOnMobile li"><a href="articles.html">Հոդվածներ և խորհուրդներ</a></li><span class="span">|</span>  
                 </ul>
             </div>
         </div>
@@ -372,6 +680,44 @@
         </div>
     </section>
 
+    <!-- ===== AI CHATBOT ===== -->
+    <button class="chatbot-toggle" id="chatToggle" onclick="toggleChat()">
+        <ion-icon name="chatbubbles-outline"></ion-icon>
+        <span class="notification-dot"></span>
+    </button>
+
+    <div class="chatbot-window" id="chatWindow">
+        <div class="chatbot-header">
+            <div class="header-info">
+                <div class="avatar">AI</div>
+                <div class="header-text">
+                    <h3>FixMyFlat AI Assistant</h3>
+                    <p><span class="status-dot"></span>Միշտ առցանց</p>
+                </div>
+            </div>
+            <button class="close-chat" onclick="toggleChat()">✕</button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="message bot">
+                👋 Բարև Ձեզ! Ես FixMyFlat-ի AI օգնականն եմ։ 
+                Ինչպե՞ս կարող եմ օգնել ձեզ այսօր։
+                <span class="timestamp">Միացված եք</span>
+            </div>
+        </div>
+        <div class="quick-replies" id="quickReplies">
+            <button class="qr-btn" onclick="quickReply('Ինտերիերի դիզայն')">🎨 Ինտերիեր</button>
+            <button class="qr-btn" onclick="quickReply('Եքստերիերի դիզայն')">🏠 Եքստերիեր</button>
+            <button class="qr-btn" onclick="quickReply('Գին')">💰 Գին</button>
+            <button class="qr-btn" onclick="quickReply('Կոնտակտ')">📞 Կոնտակտ</button>
+        </div>
+        <div class="chatbot-input-area">
+            <input type="text" id="chatInput" placeholder="Գրեք ձեր հաղորդագրությունը..." onkeypress="if(event.key==='Enter') sendMessage()">
+            <button class="send-btn" onclick="sendMessage()">
+                <ion-icon name="send-outline"></ion-icon>
+            </button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
     <script>
         function showSidebar() {
@@ -387,6 +733,132 @@
             e.preventDefault();
             alert('Շնորհակալություն! Ձեր հաղորդագրությունը ուղարկված է։ Մենք կկապվենք ձեզ հետ։');
             this.reset();
+        });
+
+        // ===== AI CHATBOT LOGIC =====
+        const chatWindow = document.getElementById('chatWindow');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+
+        function toggleChat() {
+            chatWindow.classList.toggle('open');
+            if (chatWindow.classList.contains('open')) {
+                chatInput.focus();
+            }
+        }
+
+        function sendMessage() {
+            const msg = chatInput.value.trim();
+            if (!msg) return;
+            
+            // Add user message
+            addMessage('user', msg);
+            chatInput.value = '';
+            
+            // Show typing indicator
+            const typingId = showTyping();
+            
+            // Simulate AI response
+            setTimeout(() => {
+                removeTyping(typingId);
+                const response = getAIResponse(msg);
+                addMessage('bot', response);
+            }, 1000 + Math.random() * 800);
+        }
+
+        function quickReply(text) {
+            chatInput.value = text;
+            sendMessage();
+        }
+
+        function addMessage(type, text) {
+            const div = document.createElement('div');
+            div.className = `message ${type}`;
+            
+            const now = new Date();
+            const time = now.getHours().toString().padStart(2, '0') + ':' + 
+                         now.getMinutes().toString().padStart(2, '0');
+            
+            div.innerHTML = text + `<span class="timestamp">${time}</span>`;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTyping() {
+            const div = document.createElement('div');
+            div.className = 'message bot';
+            div.id = 'typing-' + Date.now();
+            div.innerHTML = `
+                <div class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            `;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return div.id;
+        }
+
+        function removeTyping(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        function getAIResponse(msg) {
+            const lower = msg.toLowerCase();
+            
+            // Keywords and responses
+            const responses = [
+                { keywords: ['բարև', 'ոստ', 'hello', 'hi', 'բարի', 'օր'], 
+                  response: '👋 Բարև Ձեզ! Ուրախ եմ տեսնել ձեզ։ Ինչպե՞ս կարող եմ օգնել FixMyFlat-ի հետ կապված։' },
+                
+                { keywords: ['ինտերիեր', 'interior', 'սենյակ', 'հյուրասենյակ', 'ննջարան', 'խոհանոց'],
+                  response: '🎨 FixMyFlat-ը առաջարկում է ինտերիերի դիզայնի ծառայություններ։ Մենք օգնում ենք ստեղծել հարմարավետ և գեղեցիկ տարածքներ։ Կարող եք կապվել մեր մասնագետների հետ +374 93 01-42-05 հեռախոսահամարով։' },
+                
+                { keywords: ['եքստերիեր', 'exterior', 'արտաքին', 'շենք', 'ճակատ', 'պատշգամբ'],
+                  response: '🏠 Մենք զբաղվում ենք նաև եքստերիերի դիզայնով՝ շենքերի արտաքին տեսքի, ճակատների, պատշգամբների և բակերի նախագծմամբ։ Լրացուցիչ տեղեկությունների համար զանգահարեք մեզ։' },
+                
+                { keywords: ['այգի', 'garden', 'մարգագետին', 'բույս', 'ծառ', 'ծաղիկ'],
+                  response: '🌿 FixMyFlat-ը տրամադրում է այգիների և մարգագետինների նախագծման ծառայություններ։ Մենք օգնում ենք ստեղծել գեղեցիկ կանաչ տարածքներ ձեր տան շուրջ։' },
+                
+                { keywords: ['գին', 'արժեք', 'price', 'cost', 'թանկ', 'էժան'],
+                  response: '💰 FixMyFlat-ի ծառայությունների գները տատանվում են՝ կախված նախագծի բարդությունից և ծավալից։ Խնդրում ենք կապվել մեզ հետ +374 93 01-42-05 հեռախոսահամարով ճշգրիտ գնահատականի համար։' },
+                
+                { keywords: ['կոնտակտ', 'հեռախոս', 'mail', 'էլ', 'հասցե', 'where', 'գտնվել'],
+                  response: '📞 Դուք կարող եք կապվել մեզ հետ՝\n• Հեռախոս՝ +374 93 01-42-05\n• Էլ. հասցե՝ petrosyanartavazd1@gmail.com\n• WhatsApp՝ +374 93 01-42-05\n• Instagram/Facebook՝ @fixmyflat' },
+                
+                { keywords: ['աշխատանք', 'ժամ', 'ժամացույց', 'գրաֆիկ', 'schedule', 'working hours'],
+                  response: '🕐 Մեր աշխատանքային ժամերն են՝\n• Երկուշաբթի - Ուրբաթ՝ 09:00 - 18:00\n• Շաբաթ՝ 10:00 - 15:00\n• Կիրակի՝ Հանգստյան օր' },
+                
+                { keywords: ['ներողություն', 'կներեք', 'sorry', 'excuse'],
+                  response: '🙏 Ներողություն եմ խնդրում, եթե ինչ-որ բան սխալ եմ հասկացել։ Խնդրում եմ ավելի մանրամասն նկարագրեք ձեր հարցը, և ես կփորձեմ օգնել։' },
+                
+                { keywords: ['շնորհակալ', 'thank', 'thanks', 'merci', 'спасибо'],
+                  response: '😊 Շնորհակալություն մեզ հետ կապվելու համար։ Միշտ ուրախ ենք օգնել։ Եթե այլ հարցեր ունեք, ազատ զանգահարեք +374 93 01-42-05։' }
+            ];
+            
+            // Check for keyword matches
+            for (let item of responses) {
+                for (let keyword of item.keywords) {
+                    if (lower.includes(keyword)) {
+                        return item.response;
+                    }
+                }
+            }
+            
+            // Default response
+            return `🤔 Շնորհակալություն ձեր հարցի համար։ Ես ձեզ խորհուրդ եմ տալիս կապվել մեր մասնագետների հետ +374 93 01-42-05 հեռախոսահամարով կամ գրել petrosyanartavazd1@gmail.com հասցեին։ Մեր թիմը պատրաստ է օգնել ձեզ ցանկացած հարցում։ FixMyFlat - Ձեր հարմարավետ տան համար։ 🏠`;
+        }
+
+        // Click outside to close
+        document.addEventListener('click', function(e) {
+            const toggle = document.getElementById('chatToggle');
+            if (chatWindow.classList.contains('open') && 
+                !chatWindow.contains(e.target) && 
+                !toggle.contains(e.target)) {
+                chatWindow.classList.remove('open');
+            }
         });
     </script>
 </body>
